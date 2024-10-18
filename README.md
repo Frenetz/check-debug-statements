@@ -9,13 +9,16 @@ Use with [GitHub Actions](https://github.com/features/actions)
 _.github/workflows/template.yml_
 
 ```
-name: github action template
+name: check-debug-statements
 on: pull_request
 jobs:
-  ghat:
+  check-debug-statements:
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v1
-        - uses: fxpw/github_action_template_repo@main
+	- name: Run template check
+          uses: Frenetz/check-debug-statements@main
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
