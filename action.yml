@@ -1,6 +1,6 @@
-name: 'github_action_template'
-description: 'github action template'
-author: 'Anton Koshel <fxpw@outlook.com>'
+name: 'check-debug-statements'
+description: 'github action template for check constructions "dd" and "console.log" in files'
+author: 'Fedor Khodyrev <xodyrev.fedya@mail.ru>'
 runs:
   using: 'docker'
   image: 'Dockerfile'
