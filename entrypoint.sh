@@ -13,6 +13,14 @@ contains_consolelog_statements() {
   echo "$1" | grep -q -E ' console\.log\('
 }
 
+contains_dump1_statements() {
+  echo "$1" | grep -q -E ' dump\('
+}
+
+contains_dump2_statements() {
+  echo "$1" | grep -q -E ' @dump\('
+}
+
 git config --global credential.helper "store --file=.git/credentials"
 echo "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com" > .git/credentials
 git config --global --add safe.directory /github/workspace
@@ -39,7 +47,7 @@ for filename in $changed_files; do
 			line_number=0
 			while IFS= read -r line; do
 				line_number=$((line_number + 1))
-				if contains_dd1_statements "$line" || contains_dd2_statements "$line" || contains_consolelog_statements "$line"; then
+				if contains_dd1_statements "$line" || contains_dd2_statements "$line" || contains_consolelog_statements "$line" || contains_dump1_statements "$line" || contains_dump2_statements "$line"; then
 					echo "File ${filename}:${line_number} Line \"$line\" contains debug statements (dd or @dd or console.log)"
 					need_throw_error=true
 				fi
